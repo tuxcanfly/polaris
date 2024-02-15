@@ -116,8 +116,8 @@ if [[ $overwrite == "y" || $overwrite == "Y" ]]; then
 	fi
 fi
 # set the data availability layer's block height from local-celestia-devnet
-DA_BLOCK_HEIGHT=$(curl http://0.0.0.0:26657/block | jq -r '.result.block.header.height')
+DA_BLOCK_HEIGHT=$(curl http://rpc-mocha.pops.one:26657/block | jq -r '.result.block.header.height')
 echo $DA_BLOCK_HEIGHT
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-./build/bin/polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001abera --home "$HOMEDIR" --rollkit.aggregator true --rollkit.da_start_height $DA_BLOCK_HEIGHT
+./build/bin/polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001abera --home "$HOMEDIR" --rollkit.aggregator true --rollkit.da_start_height $DA_BLOCK_HEIGHT --rollkit.da_gas_price 0.01 --rollkit.da_namespace 00000000000000000000000000000000000000cb02340a89c97f9b94c9 --rollkit.da_gas_multiplier 1.2
