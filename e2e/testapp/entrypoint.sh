@@ -54,7 +54,7 @@ if [ -d "$HOMEDIR" ]; then
 	printf "\nAn existing folder at '%s' was found. You can choose to delete this folder and start a new local node with new keys from genesis. When declined, the existing local node is started. \n" "$HOMEDIR"
 	echo "Overwrite the existing configuration and start a new local node? [y/n]"
 	read -r overwrite
-else	
+else
 overwrite="Y"
 fi
 
@@ -120,4 +120,4 @@ DA_BLOCK_HEIGHT=$(curl http://rpc-mocha.pops.one:26657/block | jq -r '.result.bl
 echo $DA_BLOCK_HEIGHT
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-./build/bin/polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001abera --home "$HOMEDIR" --rollkit.aggregator true --rollkit.da_start_height $DA_BLOCK_HEIGHT --rollkit.da_gas_price 0.01 --rollkit.da_namespace 00000000000000000000000000000000000000cb02340a89c97f9b94c9 --rollkit.da_gas_multiplier 1.2
+./build/bin/polard start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --api.enabled-unsafe-cors --api.enable --api.swagger --minimum-gas-prices=0.0001abera --home "$HOMEDIR" --rollkit.aggregator true --rollkit.da_start_height $DA_BLOCK_HEIGHT --rollkit.da_gas_price 0.01 --rollkit.da_namespace 00000000000000000000000000000000000000cb02340a89c97f9b94c9 --rollkit.da_gas_multiplier 1.2 --rollkit.block_time 2s
